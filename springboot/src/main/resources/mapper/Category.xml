@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springboot.mapper.CategoryMapper">
+
+    <insert id="save">
+        insert into category(name, remark) values(#{name}, #{remark})
+    </insert>
+    <update id="updateById">
+        update category set name = #{name}, remark = #{remark},
+        update_time
+        = #{update_time} where
+        id = #{id}
+    </update>
+    <delete id="deleteById">
+        delete from category where id = #{id}
+    </delete>
+    <select id="list" resultType="com.example.springboot.entity.Category">
+        select * from category
+    </select>
+    <select id="listByCondition">
+        select * from category
+        <where>
+            <if test="name!=null and name != ''">
+                name like concat('%', #{name}, '%')
+            </if>
+        </where>
+    </select>
+
+    <select id="getById" resultType="com.example.springboot.entity.Category">
+        select * from category where id = #{id}
+    </select>
+
+</mapper>
